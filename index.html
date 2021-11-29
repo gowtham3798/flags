@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,52 +5,65 @@
       <link rel="stylesheet" href="bootstrap.min.css">
     
       <link rel="stylesheet" href="style.css">
-      <title>Calculator</title>
+      <title>DOM Form</title>
     </head>
   <body>
-     
-   
-   
-    <div id="toy-header">
-      <img
-        src="https://www.indianbarcode.com/images/product/2112.jpg"
-        alt="toy-header"
-      />
-    </div>
-
     <div class="container">
-      <form action="" class="add-toy-form">
-        <h3>Create a Toy</h3>
-        <input
-          type="text"
-          name="name"
-          value=""
-          placeholder="Enter Toys Name"
-          class="input-text"
-        />
-        <br />
-        <br />
-        <input
-          type="text"
-          name="image"
-          value=""
-          placeholder="Enter Toys Image URL"
-          class="input-text"
-        />
-        <br />
-        <br />
-        <input
-          type="submit"
-          name="submit"
-          value="Create New toy"
-          class="submit"
-        />
-      </form>
-    </div>
-    <p id="head">Render Toys <button id="new-toy-btn">Add a New Toy</button></p>
+      <form action="" class="form-input">
+        First name: <input type="text" id="fname">
+        <br>
+        <br>
+        Last name: <input type="text"  id="lname">
+        <br>
+        <br>
 
-    <div id="toy-collection"></div>
-  
+        Address: <br>
+        <textarea rows="4" cols="50" id="address"></textarea>
+        <br><br>
+
+        Pincode: <input type="text" id="pin">
+        <br><br>
+
+        Gender: <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female">Female
+        <br><br>
+
+        Food: <br><div class="text">
+        <input type="checkbox" name="food" id="check1" value="chicken briyani">Chicken Briyani<br>
+        <input type="checkbox" name="food" id="check2" value="mutton briyani">Mutton Briyani <br>
+        <input type="checkbox" name="food" id="check3" value="Veg Fried Rice">Veg Fried Rice <br>
+        <input type="checkbox" name="food" id="check4" value="Chicken Fried Rice">Chicken Fried Rice <br>
+        <input type="checkbox" name="food" id="check5" value="Pizza">Pizza <br> 
+        State: <input type="text" id="state">
+        <br><br>
+
+        Country: <input type="text" id="country">
+        <br><br>
+
+        <input
+        type="button"
+        value = "add";
+        id="insert-data"
+        onclick="addrow()"
+      />
+      </form>
+      </div>
+      <br><br>
+
+       <table class="table" id="mytable">
+           <thead class="thead-light" >
+               <tr>
+                   <td id="t1">First Name</td>
+                   <td>Last Name</td>
+                   <td>Address</td>
+                   <td>Pincode</td>
+                   <td>Gender</td>
+                   <td>Food</td>
+                   <td>State</td>
+                   <td>Country</td>
+               </tr>
+           </thead>
+        </table>
+        <script src="script.js"></script>
   </body>
-  <script src="script3.js"></script>
   </html>

@@ -1,80 +1,58 @@
-document.addEventListener("DOMContentLoaded",function(){
+
+    var list1 = [];
+    var list2 = [];
+    var list3 = [];
+    var list4 = [];
+    var list5 = [];
+    var list6 = [];
+    var list7 = [];
+    var list8 = [];
+    var createCheckboxes;
+    var n=1;
+    var x=0;
     
-    var catcollection = document.getElementById("cat-collection");
-    var catdiv ;
-    const catForm = document.querySelector(".container");
-    let toys ;
-
-    const url = "https://cataas.com/api/cats";
+    function addrow(){
+        var addrown = document.getElementById("mytable");
+        var newrow = addrown.insertRow(n);
     
-    function rendercat(toy){
-        catdiv = document.createElement('div');
-        catdiv.className = "card";
-        catdiv.innerHTML = `
-        <h6>Id : ${toy.id}</h6>
-        <h6>Date : ${toy.created_at}</h6>
-        <h6>Tags : ${toy.tags}</h6>
-        <button id=${toy.id}>"https://cataas.com/cat/${toy.id}"</button>
-        <div id=${toy.created_at} class="modal">
-         <div class="modal-content">
-         <span class=${toy.created_at}>&times;</span>
-        <img src ="https://cataas.com/cat/${toy.id}" id="img3"/>
-        </div>
-       </div>
-       <br><br>
-       `
-       catcollection.append(catdiv);
-
-       var modal = document.getElementById(toy.created_at);
-       
-       var span = document.getElementsByClassName(toy.created_at)[0];
-
-       var btn = document.getElementById(toy.id);
-
-       btn.onclick = function() {
-           modal.style.display = "block";
-       }
         
-    
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        var ele = document.getElementsByName("gender");
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+        list5[x]=ele[i].value}
+
+        list1[x] = document.getElementById("fname").value;
+        list2[x] = document.getElementById("lname").value;
+        list3[x] = document.getElementById("address").value;
+        list4[x] = document.getElementById("pin").value;
         
-    }
-        
+        var markedCheckbox = document.getElementsByName("food");
+  for (var checkbox of markedCheckbox) {
+    if (checkbox.checked)
+      list6[x] = (checkbox.value + ' ');}
 
-        let search = document.getElementById("search-box")
-        search.addEventListener("keyup",function(){
-            let textentered = search.value;
-
-            console.log(textentered);
-            if(textentered != ""){
-                fetchdata("?tags="+textentered);
-            }
-            else{
-                fetchdata(null);
-            }
-            renderAll();
-            document.getElementById("cat-collection").innerHTML = ``;
-        })
+        list7[x] = document.getElementById("state").value;
+        list8[x] = document.getElementById("country").value;
     
+        var cel1 = newrow.insertCell(0);
+        var cel2 = newrow.insertCell(1);
+        var cel3 = newrow.insertCell(2);
+        var cel4 = newrow.insertCell(3);
+        var cel5 = newrow.insertCell(4);
+        var cel6 = newrow.insertCell(5);
+        var cel7 = newrow.insertCell(6);
+        var cel8 = newrow.insertCell(7);
     
-   
-
-    function renderAll() {
-        console.log(toys);
-        toys.forEach((toy) => rendercat(toy));
+        cel1.innerHTML = list1[x];
+        cel2.innerHTML = list2[x];
+        cel3.innerHTML = list3[x];
+        cel4.innerHTML = list4[x];
+        cel5.innerHTML = list5[x];
+        cel6.innerHTML = list6[x];
+        cel7.innerHTML = list7[x];
+        cel8.innerHTML = list8[x];
+    
+        n++;
+        x++;
     }
-    const fetchdata = async (search) =>{
-        try{
-            const response = await fetch(search != null ? url+search : url);
-            const cats = await response.json()
-            .then((gtoys) => toys = gtoys)
-            renderAll(toys);
-        }    catch(err){
-            console.log(err);
-        }
-    }
-   fetchdata(null)
     
-});
