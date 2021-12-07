@@ -1,20 +1,59 @@
 body{
     margin-top: 0;
     padding: 0;
-    background:linear-gradient(to right, red , white);
+    background:linear-gradient(to right, rgba(54, 173, 104, 0.678) , white);
 }
  /*=========================
-       for heading
+for heading,search and button
  ========================*/
 div{
     text-align:center;
 }
 div>h2{
-    font-family: 'Comforter', cursive;
-    font-size: 8vmin;
+    font-family : Bradley Hand, cursive;
+    font-size: 9vmin;
     color :black;
     text-decoration: underline;
-    margin-bottom:20px;
+    margin-bottom:10px;
+}
+div>input{
+    background-color:transparent;
+    /*font*/
+    font-family: 'Comforter Brush', cursive;
+    font-size: 3vmin;
+    color: black;
+    text-align:center;
+    height:60px;
+    width: max-width;
+    /*border*/
+    border-radius: 40px;
+    border:solid black 1px; 
+}
+div>input:focus{
+    outline: none;
+    color:black;
+    background-color: white;
+    font-size: 5vmin;
+}
+div>input:hover{
+    background:white;
+    font-size:5vmin;
+}
+
+div>.btn{
+    font-family: 'Comforter Brush', cursive;
+    font-size: 4vmin;
+    border:none;
+    background:transparent;
+}
+div>.btn:focus{
+    outline:none;
+    font-size: 6vmin;
+    color:white;
+}
+div>.btn:hover{
+    font-size:6vmin;
+    color:white;
 }
 
  /*=========================
@@ -22,15 +61,16 @@ div>h2{
  ========================*/
 
 .card {
-    font-family: 'Comforter Brush', cursive;
+    align-self: stretch;
     font-size: 3vmin;
     border: none;
     width: 30vmax;
     height: 100%max-content;
     display: inline-grid;
-    margin: 6px;
+    margin: 1px 2px;
   }
-.card>p{
-    font-family: 'Kalam', cursive;
-    font-size: 4vmin;
+.card>img{
+    padding-left: 12vmin;
+    width:max-width;
+    height:max-height;
 }
