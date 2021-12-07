@@ -1,58 +1,67 @@
+const searchText = document.querySelector(".searchText");
+const searchBtn = document.querySelector(".btn");
+const displayResults = document.querySelector(".displayResult");
+const resultDiv = document.querySelector(".result");
 
-    var list1 = [];
-    var list2 = [];
-    var list3 = [];
-    var list4 = [];
-    var list5 = [];
-    var list6 = [];
-    var list7 = [];
-    var list8 = [];
-    var createCheckboxes;
-    var n=1;
-    var x=0;
-    
-    function addrow(){
-        var addrown = document.getElementById("mytable");
-        var newrow = addrown.insertRow(n);
-    
-        
-        var ele = document.getElementsByName("gender");
-            for(i = 0; i < ele.length; i++) {
-                if(ele[i].checked)
-        list5[x]=ele[i].value}
 
-        list1[x] = document.getElementById("fname").value;
-        list2[x] = document.getElementById("lname").value;
-        list3[x] = document.getElementById("address").value;
-        list4[x] = document.getElementById("pin").value;
-        
-        var markedCheckbox = document.getElementsByName("food");
-  for (var checkbox of markedCheckbox) {
-    if (checkbox.checked)
-      list6[x] = (checkbox.value + ' ');}
+ // reseting search box on every refresh
+document.addEventListener("DOMContentLoaded",function() {
+    searchText.value="";
+});
 
-        list7[x] = document.getElementById("state").value;
-        list8[x] = document.getElementById("country").value;
-    
-        var cel1 = newrow.insertCell(0);
-        var cel2 = newrow.insertCell(1);
-        var cel3 = newrow.insertCell(2);
-        var cel4 = newrow.insertCell(3);
-        var cel5 = newrow.insertCell(4);
-        var cel6 = newrow.insertCell(5);
-        var cel7 = newrow.insertCell(6);
-        var cel8 = newrow.insertCell(7);
-    
-        cel1.innerHTML = list1[x];
-        cel2.innerHTML = list2[x];
-        cel3.innerHTML = list3[x];
-        cel4.innerHTML = list4[x];
-        cel5.innerHTML = list5[x];
-        cel6.innerHTML = list6[x];
-        cel7.innerHTML = list7[x];
-        cel8.innerHTML = list8[x];
-    
-        n++;
-        x++;
+ 
+//function to be performed during the search
+searchBtn.addEventListener("click", function () {
+    if(searchText.value===""){
+        resultDiv.hidden=true;
+        alert("please come up with any letters to search");
     }
-    
+    else if(searchText.value!=""){
+ const ApiURL = "https://api.jikan.moe/v3/search/anime?q="+`${searchText.value}`;
+
+
+ //nested-function for every individual results
+ function renderResult(result) {
+  const resultDiv = document.createElement("div");
+  resultDiv.className = "card";
+  resultDiv.innerHTML = `
+    <h2>${result.title}</h2>
+    <img src="${result.image_url}" class="result-photo" />
+    <p>Synopsis - ${result.synopsis}</p>
+    <p>Episodes - ${result.episodes}</p>
+    <p>Score - ${result.score}</p>
+    <p>Rated - ${result.rated}</p>
+    `;
+  displayResults.appendChild(resultDiv);
+}
+
+//function to get all results (displays max 20 results)
+function renderAll(results) {
+  displayResults.innerHTML = "";
+  resultDiv.hidden = false;
+  let count=0;
+  for(let result of results){
+      if(result.rated==="PG-13"){ 
+        renderResult(result);
+         count++;
+       if(count===20)break;
+      }
+  }
+}
+
+  //fetching the results based on searchText
+let func = async function(ApiURL){
+    try{
+    const response = await fetch(ApiURL);
+    var result = await response.json();
+    renderAll(result.results);
+    }
+    catch(error){
+      console.log(error.message);
+      alert("try to be more specific")
+    }
+}
+// since fetching is under anonymous function , calling the function    
+func(ApiURL);
+}
+});
